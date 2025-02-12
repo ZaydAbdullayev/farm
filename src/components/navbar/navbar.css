@@ -1,0 +1,47 @@
+.navbar {
+  padding: 5px 30px;
+  z-index: 99;
+}
+
+.links {
+  a {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 5px 15px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
+
+    &:hover {
+      border-color: #049b43;
+    }
+  }
+
+  button {
+    position: relative;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 5px 15px;
+    background-color: #007430;
+    border: none;
+    cursor: pointer;
+    border: 2px solid #007430;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
+
+    &:hover {
+      background-color: #049b43;
+      border: 2px solid #049b43;
+    }
+  }
+}

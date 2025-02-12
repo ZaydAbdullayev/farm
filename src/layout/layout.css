@@ -1,0 +1,64 @@
+.app-container {
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100dvh;
+  overflow-y: auto;
+}
+
+.app-container::-webkit-scrollbar {
+  display: none;
+}
+
+.contents {
+  height: 100dvh;
+}
+
+.wheat-farm {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-25%) rotate(43deg) skew(-5deg, -5deg);
+  width: calc((600 / 1600) * 100vw);
+  height: calc((250 / 1274) * 100vh);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 10px dotted #582f0e;
+  flex-wrap: wrap;
+}
+
+.wheat-farm::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #582f0e;
+}
+
+.village-bg-item {
+  width: 100%;
+}
+
+.close-music{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 80px;
+  height: 80px;
+  background: #582f0e ;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 35px;
+  z-index: 9999;
+  transition: color 0.3s;
+
+  
+  &:hover {
+    color: #f0f0f0;
+  }
+}
