@@ -7,9 +7,12 @@ import { useState } from "react";
 import { RiMusicAiFill } from "react-icons/ri";
 import Message from "../components/message";
 import bg from "../assets/village.jpg";
+import { CitizensModal } from "../components/modal";
+import { useSelector } from "react-redux";
 
 export const Layout = () => {
   const [audio] = useState(new Audio(music));
+  const { citizen = null } = useSelector((state) => state.favDatas);
 
   // const playMusic = () => {
   //   audio.loop = true;
@@ -33,6 +36,7 @@ export const Layout = () => {
       <Navbar />
       <Outlet />
       <Message />
+      <CitizensModal open={citizen} />
       <img src={bg} alt="bg" className="village-bg" />
       <button className="close-music" onClick={toggleMusic}>
         <RiMusicAiFill />
