@@ -6,13 +6,16 @@ import music from "../assets/music.mp3";
 import { useState } from "react";
 import { RiMusicAiFill } from "react-icons/ri";
 import Message from "../components/message";
-import bg from "../assets/village.jpg";
-import { CitizensModal } from "../components/modal";
+import bg from "../assets/v.jpg";
+import { CitizensModal, InventoryModal } from "../components/modal";
 import { useSelector } from "react-redux";
 
 export const Layout = () => {
   const [audio] = useState(new Audio(music));
-  const { citizen = null } = useSelector((state) => state.favDatas);
+  const { citizen = false, inventory = false } = useSelector(
+    (state) => state.modals
+  );
+  console.log(inventory);
 
   // const playMusic = () => {
   //   audio.loop = true;
@@ -37,6 +40,7 @@ export const Layout = () => {
       <Outlet />
       <Message />
       <CitizensModal open={citizen} />
+      <InventoryModal open={inventory} />
       <img src={bg} alt="bg" className="village-bg" />
       <button className="close-music" onClick={toggleMusic}>
         <RiMusicAiFill />

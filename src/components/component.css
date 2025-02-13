@@ -10,8 +10,8 @@
 
 .wheat {
   position: relative;
-  width: 50px;
-  /* height: 50px; */
+  width: calc((50 / 1600) * 100vw);
+  height: calc((10 / 1600) * 100vw);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,8 +164,6 @@
   top: -120%;
   left: 0%;
   height: 100dvh;
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
   z-index: 99;
   transition: all 0.3s;
 }
@@ -231,5 +229,100 @@
   &:hover {
     background-color: #f5f5f5;
     transition: background-color 0.3s;
+  }
+}
+
+.chicken-coop {
+  position: relative;
+  transform: rotate(-45.5deg);
+}
+
+.hen {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  z-index: 999;
+}
+
+.barn {
+  position: absolute;
+  transform: translate(-20%, -55%) rotateY(20deg) rotate(-3deg);
+  width: 300px;
+  z-index: 99;
+  cursor: pointer;
+
+  > img {
+    width: 100%;
+  }
+}
+
+.products {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  > figure {
+    padding: 5px 10px 0;
+    border: 2px solid #fff9;
+    border-radius: 25px;
+    > img {
+      height: 20px;
+      object-fit: cover;
+    }
+  }
+}
+
+.hen3 {
+  transform: translate(170px, -90px) rotateY(20deg) rotate(-2deg);
+}
+
+.hen1 {
+  transform: translate(270px, 90px) rotateY(20deg) rotate(-2deg);
+}
+
+.hen2 {
+  transform: translate(270px, -10px) rotateY(20deg) rotate(-2deg);
+}
+
+.hen5 {
+  transform: rotateY(20deg) rotate(-2deg)
+    translate(calc((280 / 1600) * 100vw), 350px);
+}
+
+.hen6 {
+  transform: translate(40px, 100px) rotateY(200deg) rotate(-2deg);
+}
+
+.cow {
+  position: absolute;
+  height: 60px;
+  object-fit: cover;
+  z-index: 999;
+  transform: translate(130px, 0px) rotateY(20deg) rotate(-2deg);
+}
+
+.cow2 {
+  transform: translate(-50px, -80px) rotateY(20deg) rotate(-2deg);
+}
+
+.cow3 {
+  transform: translate(300%, 200px) rotateY(200deg) rotate(-2deg);
+}
+
+.cow4 {
+  transform: translate(1000%, 150px) rotateY(200deg) rotate(-2deg);
+}
+
+.btn-box {
+  button {
+    flex: 1;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #007430;
+    color: #fff;
+    cursor: pointer;
   }
 }

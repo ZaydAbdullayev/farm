@@ -1,5 +1,5 @@
 import React from 'react';
-import wheat from '../../assets/bugday.gif';
+import wheat from "../../assets/bugday.gif";
 
 export default function Wheat({ maked }) {
     return (
