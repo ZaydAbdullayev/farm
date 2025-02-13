@@ -1,4 +1,4 @@
-export const reWheat = (state = true, action) => {
+export const reWheat = (state = false, action) => {
     switch (action.type) {
         case "ON":
             return true;

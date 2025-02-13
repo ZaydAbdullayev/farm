@@ -7,7 +7,7 @@ import { ChickenCoop } from "../components/chicken-coop";
 import { acOff, acOn } from "../context/wheat";
 
 export const App = () => {
-  const maked = useSelector((state) => state.wheat);
+  const maked = useSelector((state) => state.maked);
   const [timeLeft, setTimeLeft] = useState(600);
   const [wheat, setWheat] = useState(true);
   const timerRef = useRef(null);
@@ -30,6 +30,9 @@ export const App = () => {
 
     return () => clearInterval(timerRef.current);
   }, []);
+
+  console.log(maked);
+  
 
   const collectWheat = () => {
     if (!maked) return;
