@@ -1,17 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import socket from '../../socket.config';
 import chat_icon from '../assets/chat.gif';
+import { avatars } from './avatar';
 
-const fakeMessages = [
-    { sender: 'Server', text: 'Hello!' },
-    { sender: 'Server', text: 'How are you?' },
-    { sender: 'Server', text: 'I am fine!' },
-];
+type Message = {
+    sender: string;
+    text: string;
+    avatar_id: number;
+    timestamp: number;
+};
 
-export default function Message() {
-    const [messages, setMessages] = useState<{ sender: string, text: string }[]>(fakeMessages);
+const Message = () => {
+    const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false);
+    const [users, setUsers] = useState(0);
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -21,21 +24,26 @@ export default function Message() {
 
     const handleSendMessage = () => {
         if (message.trim() === '') return;
-        socket.emit('sendMessage', message);
-        setMessages((prevMessages) => [...prevMessages, { sender: 'Me', text: message }]);
+        socket.emit('send-message', message);
+        socket.on('error', (message) => {
+            alert(message);
+        });
         setMessage('');
     };
 
     useEffect(() => {
-        socket.on('receiveMessage', (message) => {
-            setMessages((prevMessages) => [...prevMessages, { sender: 'Server', text: message }]);
+        socket.on('receive-message', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
         });
-
+        socket.on('user-count', (message) => {
+            setUsers(message);
+        });
         return () => {
-            socket.off('receiveMessage');
+            socket.off('receive-message');
+            socket.off('user-count');
         };
     }, []);
-    
+
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -44,10 +52,11 @@ export default function Message() {
         <div className={`chat-container ${open ? 'active' : ''}`}>
             <img src={chat_icon} alt="Chat" onClick={() => setOpen(!open)} />
             <div className="chat-box df fdc aic gap-10">
-                <h2>Chat</h2>
+                <h2>Chat <small>users: {users}</small></h2>
                 <div className="messages">
                     {messages.map((msg, index) => (
                         <div key={index} className='df aic gap-10'>
+                            <img src={avatars[msg.avatar_id].src} alt="avatar" />
                             <p className='df fdc'>
                                 <span>{msg.sender}:</span>
                                 {msg.text}
@@ -64,3 +73,5 @@ export default function Message() {
         </div>
     );
 }
+
+export default memo(Message);

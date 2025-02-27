@@ -31,8 +31,6 @@ export const App = () => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  console.log(maked);
-  
 
   const collectWheat = () => {
     if (!maked) return;

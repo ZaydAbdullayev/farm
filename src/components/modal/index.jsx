@@ -7,6 +7,7 @@ import egg_icon from "../../assets/egg box.png";
 import wheat_icon from "../../assets/wheat-sack.png";
 import fertilizer_icon from "../../assets/fertilizer.png";
 import { acOn } from "../../context/wheat";
+import { avatars } from "../avatar";
 
 export const CitizensModal = ({ open }) => {
   const [citizens, setCitizens] = useState([]);
@@ -96,6 +97,54 @@ export const InventoryModal = ({ open }) => {
               <button>Buy</button>
             </div>
           </figure>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ConnectModal = ({ open }) => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState(avatars[0].id);
+
+  const connect = () => {
+    if (!name) return alert("Please enter your name and select an avatar.");
+    socket.emit("join-room", { username: name, avatar_id: avatar });
+    dispatch(acRemove("connect"));
+  };
+
+  return (
+    <div className={`w100 df aic jcc modal blur15 ${open ? "show" : ""}`}>
+      <div className=" df fdc aic modal-content mini">
+        <span
+          className="close-modal"
+          onClick={() => dispatch(acRemove("connect"))}
+        >
+          &times;
+        </span>
+        <h2>Connect to play interactively in live</h2>
+
+        <div className="w100 df fw gap-10 avatart-container">
+          {avatars.map((av) => (
+            <figure
+              className={`avatar ${avatar === av.id ? "selected" : ""}`}
+              key={av.id}
+              onClick={() => setAvatar(av.id)}
+            >
+              <img src={av.src} alt="avatar" />
+            </figure>
+          ))}
+        </div>
+        <div className="df aic gap-10 name">
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="connect-input"
+          />
+          <button onClick={connect}>Connect</button>
         </div>
       </div>
     </div>

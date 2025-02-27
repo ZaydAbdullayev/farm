@@ -16,7 +16,7 @@ export const Navbar = () => {
         <Link to="/" onClick={() => dispatch(acAdd("inventory"))}>
           Inventory
         </Link>
-        <button onClick={() => alert("Connecting...")}>Connect</button>
+        <button onClick={() => dispatch(acAdd("connect"))}>Connect</button>
       </div>
     </div>
   );

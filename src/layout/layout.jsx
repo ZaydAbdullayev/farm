@@ -7,30 +7,36 @@ import { useEffect, useState } from "react";
 import { RiMusicAiFill } from "react-icons/ri";
 import Message from "../components/message";
 import bg from "../assets/v.jpg";
-import { CitizensModal, InventoryModal } from "../components/modal";
+import {
+  CitizensModal,
+  ConnectModal,
+  InventoryModal,
+} from "../components/modal";
 import { useSelector } from "react-redux";
 
 export const Layout = () => {
- const [audio] = useState(new Audio(music));
- const [isMusicStarted, setIsMusicStarted] = useState(false);
- const { citizen = false, inventory = false } = useSelector(
-   (state) => state.modals
- );
+  const [audio] = useState(new Audio(music));
+  const [isMusicStarted, setIsMusicStarted] = useState(false);
+  const {
+    citizen = false,
+    inventory = false,
+    connect = false,
+  } = useSelector((state) => state.modals);
 
- useEffect(() => {
-   const playMusic = () => {
-     if (!isMusicStarted) {
-       audio.loop = true;
-       audio.volume = 0.1;
-       audio.play().catch((err) => console.log("Autoplay blocked:", err));
-       setIsMusicStarted(true);
-     }
-   };
+  useEffect(() => {
+    const playMusic = () => {
+      if (!isMusicStarted) {
+        audio.loop = true;
+        audio.volume = 0.1;
+        audio.play().catch((err) => console.log("Autoplay blocked:", err));
+        setIsMusicStarted(true);
+      }
+    };
 
-   document.addEventListener("click", playMusic, { once: true });
+    document.addEventListener("click", playMusic, { once: true });
 
-   return () => document.removeEventListener("click", playMusic);
- }, [isMusicStarted, audio]);
+    return () => document.removeEventListener("click", playMusic);
+  }, [isMusicStarted, audio]);
 
   const toggleMusic = () => {
     if (audio.paused) {
@@ -49,6 +55,7 @@ export const Layout = () => {
       <Message />
       <CitizensModal open={citizen} />
       <InventoryModal open={inventory} />
+      <ConnectModal open={connect} />
       <img src={bg} alt="bg" className="village-bg" />
       <button className="close-music" onClick={toggleMusic}>
         <RiMusicAiFill />
