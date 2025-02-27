@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, memo } from 'react';
 import socket from '../../socket.config';
-import chat_icon from '../assets/chat.gif';
 import { avatars } from './avatar';
+import messageIcon from '../assets/picmix.com_316194.png';
 
 type Message = {
     sender: string;
@@ -42,7 +42,7 @@ const Message = () => {
             socket.off('receive-message');
             socket.off('user-count');
         };
-    }, []);
+    }, []); 
 
     useEffect(() => {
         scrollToBottom();
@@ -50,7 +50,7 @@ const Message = () => {
 
     return (
         <div className={`chat-container ${open ? 'active' : ''}`}>
-            <img src={chat_icon} alt="Chat" onClick={() => setOpen(!open)} />
+            <img src={messageIcon} alt="Chat" onClick={() => setOpen(!open)} />
             <div className="chat-box df fdc aic gap-10">
                 <h2>Chat <small>users: {users}</small></h2>
                 <div className="messages">
